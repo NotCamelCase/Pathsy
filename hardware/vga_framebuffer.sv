@@ -121,13 +121,13 @@ module vga_framebuffer
 
             WAIT_FRAME_START:
             begin
-                clear_fifo = 1'b1;
                 rd_burst_ctr_nxt = 0;
                 rd_data_ctr_nxt = 0;
-                ddr3_addr_nxt = 19'(0);
                 if (vblank) // Start fetching from DRAM on v-blank
                 begin
+                    clear_fifo = 1'b1;
                     ddr3_app_en_nxt = 1'b1;
+                    ddr3_addr_nxt = 19'(0);
                     state_nxt = BURST_READ_COMMAND;
                 end
             end

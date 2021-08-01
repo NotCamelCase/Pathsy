@@ -157,7 +157,7 @@ module top_pathsy
     // Display
     vga_framebuffer vga(
         .clk(ddr3_ui_clk),
-        .rst(ddr3_ui_clk_sync_rst),
+        .rst(sync_rst),
         .render_complete(pathsy_frame_complete),
         .ddr3_app_rdy(ddr3_app_rdy),
         .ddr3_rd_data_valid(ddr3_app_rd_data_valid),
