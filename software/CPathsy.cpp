@@ -137,11 +137,6 @@ int main(int argc, char *pArgv[])
                     {
                         Ray primRay = GeneratePrimaryRay(x, y, samplePos[rayIdx]);
                         primaryRayBuffer[rayIdx] = primRay;
-
-                        //std::cout << "rayNdx " << rayIdx << std::endl;
-                        //std::cout << std::hex << "ray.dir.x: " << FloatAsUint(primRay.dir.x) << std::endl;
-                        //std::cout << std::hex << "ray.dir.y: " << FloatAsUint(primRay.dir.y) << std::endl;
-                        //std::cout << std::hex << "ray.dir.z: " << FloatAsUint(primRay.dir.z) << std::endl;
                     }
                 }
 

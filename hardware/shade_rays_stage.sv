@@ -15,7 +15,6 @@ module shade_rays_stage
     output logic                    store_data_wr_en,
     // data store ndx
     output logic[`RPP_WIDTH-1:0]    store_data_ndx,
-    output logic                    ray_hit,
     output ray_t                    ray_new,
     output vec3_t                   ray_f_new,
     output vec3_t                   ray_l_new
@@ -432,7 +431,6 @@ module shade_rays_stage
     assign fetch_hit_info_ndx = ray_ctr_reg[`RPP_WIDTH-1:0];
     assign fetch_ray_color_ndx = ray_color_fetch_ndx_dly;
     assign store_data_wr_en = result_vld;
-    assign ray_hit = ray_hit_output_dly;
     assign store_data_ndx = ray_ndx_reg;
     assign ray_new.dir.x = new_ray_dir.x;
     assign ray_new.dir.y = new_ray_dir.y;

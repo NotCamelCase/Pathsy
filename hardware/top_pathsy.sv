@@ -138,7 +138,7 @@ module top_pathsy
     assign ddr3_app_en = pathsy_frame_complete ? vga_app_en : pathsy_app_en;
 
     // "The" core
-    pathsy pt(
+    pathsy path_tracer(
         .clk(ddr3_ui_clk),
         .rst(sync_rst),
         .start(pathsy_start),

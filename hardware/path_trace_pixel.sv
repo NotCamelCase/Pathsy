@@ -15,6 +15,9 @@ module path_trace_pixel
     // Min # of rays traced by TR after which SR can make forward progress without inducing a data race
     localparam  TR_STALL_SR_THRESHOLD   = 58;
 
+    // This delay is necessary due to registered BRAM writes into the secondary ray buffer by SR
+    localparam  SR_STALL_TR_THRESHOLD   = 2;
+
     // FSM for generate_primary_rays_stage
     typedef enum {
         GPR_IDLE,
@@ -134,7 +137,6 @@ module path_trace_pixel
         .fetch_hit_info_ndx(shade_rays_stage_fetch_hit_info_ndx),
         .fetch_ray_color_ndx(shade_rays_stage_fetch_ray_color_ndx),
         .store_data_wr_en(shade_rays_stage_store_data_wr_en),
-        .ray_hit(shade_rays_stage_ray_hit),
         .store_data_ndx(shade_rays_stage_store_data_ndx),
         .ray_new(shade_rays_stage_ray_new),
         .ray_f_new(shade_rays_stage_ray_f_new),
@@ -367,7 +369,7 @@ module path_trace_pixel
         sr_first_bounce_nxt = sr_first_bounce_reg;
         sr_terminated_nxt = sr_terminated_reg;
 
-        sr_stall_tr = ~(shade_rays_stage_store_data_wr_en & (shade_rays_stage_store_data_ndx > 2));
+        sr_stall_tr = ~(shade_rays_stage_store_data_wr_en & (shade_rays_stage_store_data_ndx > SR_STALL_TR_THRESHOLD));
 
         case (sr_state_reg)
             SR_IDLE:

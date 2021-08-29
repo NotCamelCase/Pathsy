@@ -47,6 +47,9 @@ float RandomFloatOffline()
 // Populate sample pos array and output the LUT
 void GenerateSamplePattern(SamplePos* pSamplePos)
 {
+    // Used the algorithm from Correlated Multi-Jittered Sampling paper below
+    // https://graphics.pixar.com/library/MultiJitteredSampling/paper.pdf
+
     std::fstream lut;
     if (g_cSaveSamplePosROM)
         lut.open("sample_pos.mem", std::fstream::binary | std::fstream::out);
